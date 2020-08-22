@@ -1,0 +1,37 @@
+<div style="padding: 20px;">
+  <p style="width: 100%; text-align: center;">{{ timestamp }}</p>
+  <div
+    style="position: absolute; pointer-events: none;"
+    [ngStyle]="{ display: title.length !== 0 ? 'none' : 'block' }"
+  >
+    Title
+  </div>
+  <div
+    class="title"
+    contenteditable="true"
+    role="textbox"
+    tabindex="0"
+    data-gramm="false"
+    spellcheck="false"
+    aria-label="Title"
+    [textContent]="title"
+    (input)="getTitle($event)"
+  ></div>
+  <div
+    style="position: absolute; pointer-events: none;"
+    [ngStyle]="{ display: description.length !== 0 ? 'none' : 'block' }"
+  >
+    Take A Note
+  </div>
+  <div
+    class="main-note"
+    contenteditable="true"
+    aria-multiline="true"
+    role="textbox"
+    tabindex="0"
+    [textContent]="description"
+    data-gramm="false"
+    spellcheck="false"
+    (input)="getDescription($event)"
+  ></div>
+</div>

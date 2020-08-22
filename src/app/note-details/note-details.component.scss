@@ -1,0 +1,12 @@
+.main-note[contenteditable] {
+  box-sizing: border-box;
+  min-height: auto;
+  outline: 0px solid transparent;
+}
+.title[contenteditable] {
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  outline: 0px solid transparent;
+}

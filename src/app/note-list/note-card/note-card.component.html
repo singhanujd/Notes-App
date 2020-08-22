@@ -1,0 +1,10 @@
+<div class="card rounded-0" style="width: 18rem;" *ngIf="isNoteNotEmpty()">
+  <div class="card-body" (click)="openSelectedNote()">
+    <h5 class="card-title">{{ note.title }}</h5>
+    <p class="card-text">
+      {{ getTime(note.timestamp) }}
+      &nbsp;
+      {{ note.description }}
+    </p>
+  </div>
+</div>

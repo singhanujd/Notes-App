@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  width: 100vw;
+}
+.header > div {
+  padding: 6px 12px;
+  display: flex;
+}
+.icon {
+  display: inline;
+}
+
+button {
+  flex: 1;
+}
