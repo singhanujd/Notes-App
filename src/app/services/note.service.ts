@@ -1,6 +1,6 @@
 import { BehaviorSubject, Subject } from 'rxjs';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { Injectable } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +10,10 @@ export class NoteService {
   public expandSidebarEvent = new Subject();
   public newNoteEvent = new Subject();
   public selectedNote = new Subject();
-  showSidebar;
+  public searchTerm = new Subject();
+  showSidebar: boolean = true;
 
-  constructor(private deviceDetectorService: DeviceDetectorService) {
-    if (this.deviceDetectorService.isMobile()) {
-      this.showSidebar = false;
-    } else {
-      this.showSidebar = true;
-    }
-  }
+  constructor() {}
 
   newNote() {
     this.newNoteEvent.next();
@@ -26,6 +21,16 @@ export class NoteService {
 
   toggleSideBar() {
     this.showSidebar = !this.showSidebar;
+    this.expandSidebarEvent.next(this.showSidebar);
+  }
+
+  expandSidebar() {
+    this.showSidebar = true;
+    this.expandSidebarEvent.next(this.showSidebar);
+  }
+
+  collapseSidebar() {
+    this.showSidebar = false;
     this.expandSidebarEvent.next(this.showSidebar);
   }
 }

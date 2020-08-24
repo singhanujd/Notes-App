@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Note } from './models/note.interface';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 import { NoteService } from './services/note.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +8,18 @@ import { NoteService } from './services/note.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  notes$: Observable<Note[]>;
-  showSideBar;
+  showSideBar$: any;
 
   constructor(
-    private store: Store<{ notes: Note[] }>,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private deviceDetectorService: DeviceDetectorService
   ) {
-    this.notes$ = store.pipe(select('notes'));
-    this.noteService.expandSidebarEvent.subscribe(
-      (data) => (this.showSideBar = data)
-    );
+    this.showSideBar$ = this.noteService.expandSidebarEvent;
+  }
+
+  ngAfterViewInit() {
+    if (this.deviceDetectorService.isDesktop()) {
+      this.noteService.expandSidebar();
+    }
   }
 }

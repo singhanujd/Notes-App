@@ -1,8 +1,8 @@
 <div style="padding: 20px;">
   <p style="width: 100%; text-align: center;">{{ timestamp }}</p>
   <div
-    style="position: absolute; pointer-events: none;"
-    [ngStyle]="{ display: title.length !== 0 ? 'none' : 'block' }"
+    class="placeholderText"
+    [ngStyle]="{ display: placeholderTextVisibility() }"
   >
     Title
   </div>
@@ -13,13 +13,12 @@
     tabindex="0"
     data-gramm="false"
     spellcheck="false"
-    aria-label="Title"
     [textContent]="title"
     (input)="getTitle($event)"
   ></div>
   <div
-    style="position: absolute; pointer-events: none;"
-    [ngStyle]="{ display: description.length !== 0 ? 'none' : 'block' }"
+    class="placeholderText"
+    [ngStyle]="{ display: placeholderTextVisibility() }"
   >
     Take A Note
   </div>

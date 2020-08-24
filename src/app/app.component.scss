@@ -4,11 +4,16 @@
   column-gap: 40px;
 }
 
-@media only screen and (max-width: 768px) {
+.sidebar {
+  max-height: calc(100vh - 67px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media only screen and (max-width: 425px) {
   .sidebar {
+    width: 50%;
     padding-left: 0;
     position: fixed;
-    background-color: #f8f9fa;
-    height: 100%;
   }
 }

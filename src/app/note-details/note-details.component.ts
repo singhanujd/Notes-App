@@ -24,32 +24,14 @@ export class NoteDetailsComponent implements OnInit {
     this.noteService.newNoteEvent.subscribe({
       next: () => {
         this.newNote();
-        this.store.dispatch(
-          addNote({
-            note: {
-              id: this.id,
-              title: this.title,
-              description: this.description,
-              timestamp: this.timestamp,
-            },
-          })
-        );
+        this.dispatchAddNoteAction();
       },
     });
     this.noteService.deleteNoteEvent.subscribe({
       next: () => {
         this.store.dispatch(deleteNote({ noteId: this.id }));
         this.newNote();
-        this.store.dispatch(
-          addNote({
-            note: {
-              id: this.id,
-              title: this.title,
-              description: this.description,
-              timestamp: this.timestamp,
-            },
-          })
-        );
+        this.dispatchAddNoteAction();
       },
     });
     this.noteService.selectedNote.subscribe({
@@ -57,10 +39,12 @@ export class NoteDetailsComponent implements OnInit {
         this.store
           .pipe(select(getSelectedNote, { noteId: noteId }))
           .subscribe((data) => {
-            this.title = data.title;
-            this.description = data.description;
-            this.timestamp = data.timestamp;
-            this.id = data.id;
+            if (data) {
+              this.title = data.title;
+              this.description = data.description;
+              this.timestamp = data.timestamp;
+              this.id = data.id;
+            }
           });
       },
     });
@@ -68,6 +52,31 @@ export class NoteDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.newNote();
+    this.dispatchAddNoteAction();
+  }
+
+  getTitle(event: any) {
+    this.title = event.target.textContent;
+    this.dispatchUpdateNoteAction();
+  }
+
+  getDescription(event: any) {
+    this.description = event.target.textContent;
+    this.dispatchUpdateNoteAction();
+  }
+
+  newNote() {
+    this.id = uuidv4();
+    this.title = '';
+    this.description = '';
+    this.timestamp = new Date().toLocaleString();
+  }
+
+  placeholderTextVisibility() {
+    return this.title.length !== 0 ? 'none' : 'block';
+  }
+
+  dispatchAddNoteAction() {
     this.store.dispatch(
       addNote({
         note: {
@@ -80,8 +89,7 @@ export class NoteDetailsComponent implements OnInit {
     );
   }
 
-  getTitle(event: any) {
-    this.title = event.target.textContent;
+  dispatchUpdateNoteAction() {
     this.store.dispatch(
       updateNote({
         id: this.id,
@@ -92,26 +100,5 @@ export class NoteDetailsComponent implements OnInit {
         },
       })
     );
-  }
-
-  getDescription(event: any) {
-    this.description = event.target.textContent;
-    this.store.dispatch(
-      updateNote({
-        id: this.id,
-        note: {
-          title: this.title,
-          description: this.description,
-          timestamp: this.timestamp,
-        },
-      })
-    );
-  }
-
-  newNote() {
-    this.id = uuidv4();
-    this.title = '';
-    this.description = '';
-    this.timestamp = new Date().toLocaleString();
   }
 }

@@ -1,3 +1,7 @@
-<div *ngFor="let note of notes">
+<div
+  *ngFor="
+    let note of notes$ | async | search: searchTerm | highlight: searchTerm
+  "
+>
   <app-note-card [note]="note"></app-note-card>
 </div>

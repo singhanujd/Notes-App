@@ -9,3 +9,9 @@ body {
 *::after {
   box-sizing: border-box;
 }
+
+@media only screen and (max-width: 425px) {
+  * {
+    font-size: 15px !important;
+  }
+}

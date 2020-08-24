@@ -26,6 +26,7 @@
     "@reactivex/rxjs": "^6.6.2",
     "bootstrap": "^4.5.2",
     "font-awesome": "^4.7.0",
+    "moment": "^2.27.0",
     "ngx-device-detector": "^1.4.6",
     "tslib": "^2.0.0",
     "uuid": "^8.3.0",

@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="main">
   <div class="sidebar">
-    <app-note-list *ngIf="showSideBar"></app-note-list>
+    <app-note-list *ngIf="showSideBar$ | async"></app-note-list>
   </div>
   <div style="width: 100%;">
     <app-note-details></app-note-details>
