@@ -15,6 +15,7 @@ export class AppComponent {
     private deviceDetectorService: DeviceDetectorService
   ) {
     this.showSideBar$ = this.noteService.expandSidebarEvent;
+    // sdfdsfdg
   }
 
   ngAfterViewInit() {
